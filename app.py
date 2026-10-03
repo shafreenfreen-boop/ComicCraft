@@ -25,7 +25,7 @@ if st.button("🚀 Generate Comic Story"):
         with st.spinner("Generating..."):
             # PUDHU MODEL NAME - 2.0-flash
             response = client.models.generate_content(
-                model="gemini-2.0-flash",
+              model="gemini-1.5-flash"
                 contents=f"Create a 5 panel comic outline as JSON for story: {prompt}, character: {char_name}, setting: {setting}, tone: {tone}, art_style: {art_style}. Each panel need title, description, image_prompt, caption, dialogue."
             )
             st.success("✅ Success!")
