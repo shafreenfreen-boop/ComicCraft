@@ -1,5 +1,5 @@
 import streamlit as st
-import google.generativeai as genai
+from google import genai
 
 st.set_page_config(page_title="ComicCraft")
 st.title("ComicCraft - AI Comic Creator")
@@ -9,11 +9,8 @@ story = st.text_area("Enter your story idea - ex: Shabana adventure")
 
 if st.button("Generate Comic Story"):
     if api_key and story:
-        genai.configure(api_key=api_key)
-        model = genai.GenerativeModel("gemini-1.5-flash")
+        client = genai.Client(api_key=api_key)
         prompt = f"Create a 4 panel comic story script for: {story}. Give panel wise description and dialogues."
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
         st.success("Comic Generated!")
         st.write(response.text)
-    else:
-        st.warning("API key and story kuduthiya da?")
